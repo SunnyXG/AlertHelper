@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AlertHelper_Example' do
+  pod 'AlertHelper', :path => '../'
+
+  target 'AlertHelper_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
