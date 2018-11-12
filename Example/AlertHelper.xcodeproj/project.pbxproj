@@ -68,7 +68,7 @@
 		91DA2FB1C26BDE1100E8CE92 /* Pods-AlertHelper_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlertHelper_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlertHelper_Example/Pods-AlertHelper_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		BAC1A7BE071FBE84C261C30D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CF7AE3A778AE5ABAF7F0D1CA /* Pods-AlertHelper_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlertHelper_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlertHelper_Tests/Pods-AlertHelper_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E10A1A169BAB3F4C10DB48FD /* AlertHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AlertHelper.podspec; path = ../AlertHelper.podspec; sourceTree = "<group>"; };
+		E10A1A169BAB3F4C10DB48FD /* AlertHelper.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AlertHelper.podspec; path = ../AlertHelper.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

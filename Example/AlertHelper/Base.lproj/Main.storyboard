@@ -48,13 +48,33 @@
                                     <action selector="defaultTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="Gep-jD-vLZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haG-cO-gPx">
+                                <rect key="frame" x="95" y="256" width="184" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="带一个按钮"/>
+                                <connections>
+                                    <action selector="alertWithSingleButton:" destination="whP-gf-Uak" eventType="touchUpInside" id="dPM-BO-phO"/>
+                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="8fA-9d-N4m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AI-SR-qMr">
+                                <rect key="frame" x="95" y="318" width="184" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="在window上显示"/>
+                                <connections>
+                                    <action selector="alertAtWindow:" destination="whP-gf-Uak" eventType="touchUpInside" id="cI8-QA-gdO"/>
+                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="Egd-XH-UIC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.80000000000001" y="432.23388305847078"/>
+            <point key="canvasLocation" x="542" y="367"/>
         </scene>
     </scenes>
 </document>

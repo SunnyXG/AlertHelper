@@ -8,6 +8,7 @@
 
 #import "ZZAlertHelper.h"
 #import <Masonry/Masonry.h>
+#import "CustomLabel.h"
 
 #define kAlertImageHeight   40
 #define kAlertMargin    20
@@ -17,7 +18,8 @@ static HelperConfigurationHandler configHandler;
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) CustomLabel *titleLabel;
+@property (nonatomic, strong) CustomLabel *subtitleLabel;
 @property (nonatomic, strong) UIButton *btnConfirm;
 @property (nonatomic, strong) UIButton *btnCancel;
 @property (nonatomic, strong) UIView *customView;
@@ -27,8 +29,9 @@ static HelperConfigurationHandler configHandler;
 @property (nonatomic, copy) ButtonActionBlock confirmHandleBlock;
 @property (nonatomic, copy) ButtonActionBlock cancelHandleBlock;
 
-@property (nonatomic, assign) CGFloat titleLabelWidth;
+@property (nonatomic, assign) CGFloat contentViewWidth;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
+@property (nonatomic, assign) CGFloat subtitleLabelHeight;
 
 @end
 
@@ -77,7 +80,7 @@ static HelperConfigurationHandler configHandler;
 
 ZZAlertHelper * AlertText(UIView *view)
 {
-    return [[ZZAlertHelper alloc] initWithSourceView:view delay:1.5];
+    return [[ZZAlertHelper alloc] initWithSourceView:view delay:2.0];
 }
 
 ZZAlertHelper * AlertView(UIView *view)
@@ -89,7 +92,7 @@ ZZAlertHelper * AlertTextInWindow()
 {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     
-    return [[ZZAlertHelper alloc] initWithSourceView:keyWindow delay:1.5];;
+    return [[ZZAlertHelper alloc] initWithSourceView:keyWindow delay:2.0];;
 }
 
 ZZAlertHelper * AlertViewInWindow()
@@ -134,9 +137,17 @@ void AlertHideInWindow(void)
             make.edges.equalTo(self.sourceView);
         }];
         
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (self.imageView.image) {
+                make.height.equalTo(@(kAlertMargin + kAlertImageHeight + self.titleLabelHeight + self.subtitleLabelHeight));
+            } else {
+                make.height.equalTo(@(self.titleLabelHeight + self.subtitleLabelHeight));
+            }
+        }];
+        
         [self layoutIfNeeded];
         
-        SetViewEdgeBorder(self.titleLabel, UIRectEdgeBottom);
+        SetViewEdgeBorder(self.subtitleLabel.text ? self.subtitleLabel : self.titleLabel, UIRectEdgeBottom);
         if (self.delayTime > 0) {
             SetRoundedCorners(self.contentView, UIRectCornerAllCorners, CGSizeMake(6, 6));
         } else {
@@ -165,16 +176,7 @@ void AlertHideInWindow(void)
             make.centerX.equalTo(self.contentView.mas_centerX);
             make.width.height.equalTo(@(kAlertImageHeight));
         }];
-        
-        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@(self.titleLabelWidth));
-            if (self.titleLabel.text) {
-                make.height.equalTo(@(kAlertMargin + kAlertImageHeight + self.titleLabelHeight));
-            } else {
-                make.height.equalTo(@(kAlertMargin * 2 + kAlertImageHeight));
-            }
-        }];
-        
+
         return self;
     };
 }
@@ -187,18 +189,25 @@ void AlertHideInWindow(void)
          [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
              make.top.equalTo(self.imageView.mas_bottom);
              make.centerX.equalTo(self.contentView.mas_centerX);
-             make.width.equalTo(@(self.titleLabelWidth));
+             make.width.equalTo(@(self.contentViewWidth));
              make.height.equalTo(@(self.titleLabelHeight));
          }];
-         
-         [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-             make.width.equalTo(@(self.titleLabelWidth));
-             if (self.imageView.image) {
-                 make.height.equalTo(@(kAlertMargin + kAlertImageHeight + self.titleLabelHeight));
-             } else {
-                 make.height.equalTo(@(self.titleLabelHeight));
-             }
-         }];
+
+        return self;
+    };
+}
+
+- (ZZAlertHelper * (^)(NSString *))message
+{
+    return ^(NSString *message){
+        self.subtitleLabel.text = message;
+        
+        [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.titleLabel.mas_bottom);
+            make.centerX.equalTo(self.contentView.mas_centerX);
+            make.width.equalTo(@(self.contentViewWidth));
+            make.height.equalTo(@(self.subtitleLabelHeight));
+        }];
 
         return self;
     };
@@ -212,8 +221,8 @@ void AlertHideInWindow(void)
         [self.btnConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView.mas_right);
             make.top.equalTo(self.contentView.mas_bottom);
-            make.width.equalTo(self.contentView.mas_width).multipliedBy(0.5);
             make.height.equalTo(@40);
+            make.width.equalTo(self.contentView.mas_width).multipliedBy(0.5);
         }];
         
         [self layoutIfNeeded];
@@ -288,6 +297,15 @@ void AlertHideInWindow(void)
     };
 }
 
+- (ZZAlertHelper * (^)(UIColor *))messageColor
+{
+    return ^(UIColor *color) {
+        self.subtitleLabel.textColor = color;
+        
+        return self;
+    };
+}
+
 - (ZZAlertHelper * (^)(UIColor *))confirmBackgroundColor
 {
     return ^(UIColor *color) {
@@ -310,6 +328,23 @@ void AlertHideInWindow(void)
 {
     return ^(UIFont *font) {
         self.titleLabel.font = font;
+        
+        return self;
+    };
+}
+
+- (ZZAlertHelper * (^)(UIFont *))messageFont
+{
+    return ^(UIFont *font) {
+        self.subtitleLabel.font = font;
+        
+        return self;
+    };
+}
+
+- (ZZAlertHelper * (^)(UIFont *))buttonFont
+{
+    return ^(UIFont *font) {
         self.btnConfirm.titleLabel.font = font;
         self.btnCancel.titleLabel.font = font;
         
@@ -335,61 +370,88 @@ void AlertHideInWindow(void)
 
 - (void)setContentViewColor:(UIColor *)contentViewColor
 {
-    _contentView.backgroundColor = contentViewColor;
+    self.contentView.backgroundColor = contentViewColor;
 }
 
-- (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor
+- (void)setTitleTextColor:(UIColor *)titleTextColor
 {
-    _titleLabel.textColor = titleLabelTextColor;
+    self.titleLabel.textColor = titleTextColor;
+}
+
+- (void)setMessageTextColor:(UIColor *)messageTextColor
+{
+    self.subtitleLabel.textColor = messageTextColor;
 }
 
 - (void)setConfirmButtonTextColor:(UIColor *)confirmButtonTextColor
 {
-    [_btnConfirm setTitleColor:confirmButtonTextColor forState:UIControlStateNormal];
+    [self.btnConfirm setTitleColor:confirmButtonTextColor forState:UIControlStateNormal];
 }
 
 - (void)setCancelButtonTextColor:(UIColor *)cancelButtonTextColor
 {
-    [_btnCancel setTitleColor:cancelButtonTextColor forState:UIControlStateNormal];
+    [self.btnCancel setTitleColor:cancelButtonTextColor forState:UIControlStateNormal];
 }
 
 - (void)setConfirmButtonBackgroundColor:(UIColor *)confirmButtonBackgroundColor
 {
-    _btnConfirm.backgroundColor = confirmButtonBackgroundColor;
+    self.btnConfirm.backgroundColor = confirmButtonBackgroundColor;
 }
 
 - (void)setCancelButtonBackgroundColor:(UIColor *)cancelButtonBackgroundColor
 {
-    _btnCancel.backgroundColor = cancelButtonBackgroundColor;
+    self.btnCancel.backgroundColor = cancelButtonBackgroundColor;
 }
 
 - (void)setTextFont:(UIFont *)textFont
 {
-    _titleLabel.font = textFont;
-    _btnConfirm.titleLabel.font = textFont;
-    _btnCancel.titleLabel.font = textFont;
+    self.titleLabel.font = textFont;
 }
 
-- (CGFloat)titleLabelWidth
+- (void)setMessageTextFont:(UIFont *)messageTextFont
 {
-    if (_titleLabelWidth <= 0) {
+    self.subtitleLabel.font = messageTextFont;
+}
+
+- (void)setButtonTextFont:(UIFont *)buttonTextFont
+{
+    self.btnConfirm.titleLabel.font = buttonTextFont;
+    self.btnCancel.titleLabel.font = buttonTextFont;
+}
+
+- (CGFloat)contentViewWidth
+{
+    if (_contentViewWidth <= 0) {
         if (self.delayTime > 0) {
-            _titleLabelWidth = CGRectGetWidth(self.sourceView.frame) * 0.85;
+            _contentViewWidth = CGRectGetWidth(self.sourceView.frame) * 0.85;
         } else {
-            _titleLabelWidth = CGRectGetWidth(self.sourceView.frame) * 0.72;
+            _contentViewWidth = CGRectGetWidth(self.sourceView.frame) * 0.72;
         }
     }
     
-    return _titleLabelWidth;
+    return _contentViewWidth;
 }
 
 - (CGFloat)titleLabelHeight
 {
-    if (_titleLabelHeight <= 0) {
-        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.titleLabelWidth, 120)) + 50;
+    _titleLabelHeight = 0;
+    
+    if (_titleLabel.text) {
+        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.contentViewWidth, 120)) + 40;
     }
     
     return _titleLabelHeight;
+}
+
+- (CGFloat)subtitleLabelHeight
+{
+    _subtitleLabelHeight = 0;
+    
+    if (_subtitleLabel.text) {
+        _subtitleLabelHeight = GetHeightWithText(self.subtitleLabel.text, CGSizeMake(self.contentViewWidth, 120)) + 20;
+    }
+    
+    return _subtitleLabelHeight;
 }
 
 - (UIView *)contentView
@@ -403,6 +465,7 @@ void AlertHideInWindow(void)
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
             make.centerY.equalTo(self.mas_centerY);
+            make.width.equalTo(@(self.contentViewWidth));
         }];
     }
     
@@ -450,19 +513,35 @@ void AlertHideInWindow(void)
     return _imageView;
 }
 
-- (UILabel *)titleLabel
+- (CustomLabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [UILabel new];
-        _titleLabel.font = [UIFont systemFontOfSize:17];
+        _titleLabel = [CustomLabel new];
+        _titleLabel.edgeInsets = UIEdgeInsetsMake(20, 0, 20, 0);
+        _titleLabel.font = [UIFont boldSystemFontOfSize:17];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = [UIColor colorWithRed:(51 / 255.0f) green:(51 / 255.0f)                                                                                        blue:(51 / 255.0f) alpha:1];
-        _titleLabel.numberOfLines = 2;
         
         [self.contentView addSubview:_titleLabel];
     }
     
     return _titleLabel;
+}
+
+- (CustomLabel *)subtitleLabel
+{
+    if (!_subtitleLabel) {
+        _subtitleLabel = [CustomLabel new];
+        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(0, 0, 20, 0);
+        _subtitleLabel.font = [UIFont systemFontOfSize:16];
+        _subtitleLabel.textAlignment = NSTextAlignmentCenter;
+        _subtitleLabel.textColor = [UIColor colorWithRed:(151 / 255.0f) green:(151 / 255.0f)                                                                                        blue:(151 / 255.0f) alpha:1];
+        _subtitleLabel.numberOfLines = 0;
+        
+        [self.contentView addSubview:_subtitleLabel];
+    }
+    
+    return _subtitleLabel;
 }
 
 - (void)setDelayTime:(NSTimeInterval)delayTime
@@ -486,7 +565,7 @@ void AlertHideInWindow(void)
 
 void SetupZZAlertHelperConfiguration(HelperConfigurationHandler handler)
 {
-    handler = configHandler;
+    configHandler = handler;
 }
 
 CGFloat GetHeightWithText(NSString *text, CGSize textSize)

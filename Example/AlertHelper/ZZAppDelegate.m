@@ -7,12 +7,19 @@
 //
 
 #import "ZZAppDelegate.h"
+#import "ZZAlertHelper.h"
+#import "ZZViewController.h"
+
+void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper);
 
 @implementation ZZAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    [self setupAppPerference];
+    
     return YES;
 }
 
@@ -42,5 +49,19 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)setupAppPerference
+{
+    SetupZZAlertHelperConfiguration(CustomConfigurationForAlertHelper);
+}
+
+#pragma mark -
+// custom setup for alertHelper.
+void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper)
+{
+//    alertHelper.titleTextColor = [UIColor darkTextColor];
+    alertHelper.textFont = [UIFont boldSystemFontOfSize:17];
+}
+
 
 @end

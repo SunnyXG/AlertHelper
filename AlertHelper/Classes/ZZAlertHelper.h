@@ -19,16 +19,22 @@ typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 @interface ZZAlertHelper : UIView
 
 @property (nonatomic, strong) UIColor *contentViewColor;
-@property (nonatomic, strong) UIColor *titleLabelTextColor;
+@property (nonatomic, strong) UIColor *titleTextColor;
+@property (nonatomic, strong) UIColor *messageTextColor;
 @property (nonatomic, strong) UIColor *confirmButtonTextColor;
 @property (nonatomic, strong) UIColor *cancelButtonTextColor;
 @property (nonatomic, strong) UIColor *confirmButtonBackgroundColor;
 @property (nonatomic, strong) UIColor *cancelButtonBackgroundColor;
 @property (nonatomic, strong) UIFont *textFont;
+@property (nonatomic, strong) UIFont *messageTextFont;
+@property (nonatomic, strong) UIFont *buttonTextFont;
+
 
 - (ZZAlertHelper * (^)(UIImage *))image;
 
 - (ZZAlertHelper * (^)(NSString *))title;
+
+- (ZZAlertHelper * (^)(NSString *))message;
 
 - (ZZAlertHelper * (^)(void))show;
 
@@ -48,7 +54,13 @@ typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 
 - (ZZAlertHelper * (^)(UIColor *))titleColor;
 
+- (ZZAlertHelper * (^)(UIColor *))messageColor;
+
 - (ZZAlertHelper * (^)(UIFont *))font;
+
+- (ZZAlertHelper * (^)(UIFont *))messageFont;
+
+- (ZZAlertHelper * (^)(UIFont *))buttonFont;
 
 - (ZZAlertHelper * (^)(UIColor *))confirmBackgroundColor;
 
