@@ -7,7 +7,7 @@
 //
 
 #import "ZZViewController.h"
-#import "AlertHelper.h"
+#import "ZZAlertHelper.h"
 
 @interface ZZViewController ()
 

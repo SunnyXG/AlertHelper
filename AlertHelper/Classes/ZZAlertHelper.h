@@ -1,5 +1,5 @@
 //
-//  AlertHelper.h
+//  ZZAlertHelper.h
 //  demo
 //
 //  Created by zhangxiaoguang on 2018/11/8.
@@ -11,12 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class AlertHelper;
+@class ZZAlertHelper;
 
 typedef void (^ButtonActionBlock) (void);
-typedef void (*HelperConfigurationHandler)(AlertHelper *);
+typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 
-@interface AlertHelper : UIView
+@interface ZZAlertHelper : UIView
 
 @property (nonatomic, strong) UIColor *contentViewColor;
 @property (nonatomic, strong) UIColor *titleLabelTextColor;
@@ -26,50 +26,50 @@ typedef void (*HelperConfigurationHandler)(AlertHelper *);
 @property (nonatomic, strong) UIColor *cancelButtonBackgroundColor;
 @property (nonatomic, strong) UIFont *textFont;
 
-- (AlertHelper * (^)(UIImage *))image;
+- (ZZAlertHelper * (^)(UIImage *))image;
 
-- (AlertHelper * (^)(NSString *))title;
+- (ZZAlertHelper * (^)(NSString *))title;
 
-- (AlertHelper * (^)(void))show;
+- (ZZAlertHelper * (^)(void))show;
 
-- (AlertHelper * (^)(NSTimeInterval))delay;
+- (ZZAlertHelper * (^)(NSTimeInterval))delay;
 
-- (AlertHelper * (^)(NSString *))confirmButton;
+- (ZZAlertHelper * (^)(NSString *))confirmButton;
 
-- (AlertHelper * (^)(NSString *))cancelButton;
+- (ZZAlertHelper * (^)(NSString *))cancelButton;
 
-- (AlertHelper * (^)(ButtonActionBlock))confirmHandler;
+- (ZZAlertHelper * (^)(ButtonActionBlock))confirmHandler;
 
-- (AlertHelper * (^)(ButtonActionBlock))cancelHandler;
+- (ZZAlertHelper * (^)(ButtonActionBlock))cancelHandler;
 
-- (AlertHelper * (^)(UIColor *))cancelTitleColor;
+- (ZZAlertHelper * (^)(UIColor *))cancelTitleColor;
 
-- (AlertHelper * (^)(UIColor *))confirmTitleColor;
+- (ZZAlertHelper * (^)(UIColor *))confirmTitleColor;
 
-- (AlertHelper * (^)(UIColor *))titleColor;
+- (ZZAlertHelper * (^)(UIColor *))titleColor;
 
-- (AlertHelper * (^)(UIFont *))font;
+- (ZZAlertHelper * (^)(UIFont *))font;
 
-- (AlertHelper * (^)(UIColor *))confirmBackgroundColor;
+- (ZZAlertHelper * (^)(UIColor *))confirmBackgroundColor;
 
-- (AlertHelper * (^)(UIColor *))cancelBackgroundColor;
+- (ZZAlertHelper * (^)(UIColor *))cancelBackgroundColor;
 
 #pragma mark - Functions
 
 /*
  * Configuration alert customized.
  */
-void SetupAlertHelperConfiguration(HelperConfigurationHandler handle);
+void SetupZZAlertHelperConfiguration(HelperConfigurationHandler handle);
 
 /*
  * The alert view init and add to source view.
  * AlertText() | AlertTextInWindow() : alert hided delay 1.5s, when you want alert some message(ex:error meassge), used it!;
  * AlertView() | AlertViewInWindow() : if you want to operate some action, used it!.
  */
-AlertHelper * AlertText(UIView *view);
-AlertHelper * AlertView(UIView *view);
-AlertHelper * AlertTextInWindow(void);
-AlertHelper * AlertViewInWindow(void);
+ZZAlertHelper * AlertText(UIView *view);
+ZZAlertHelper * AlertView(UIView *view);
+ZZAlertHelper * AlertTextInWindow(void);
+ZZAlertHelper * AlertViewInWindow(void);
 
 void AlertHide(UIView *sourceView);
 void AlertHideInWindow(void);

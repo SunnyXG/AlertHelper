@@ -1,19 +1,19 @@
 //
-//  AlertHelper.m
+//  ZZAlertHelper.m
 //  demo
 //
 //  Created by zhangxiaoguang on 2018/11/8.
 //  Copyright © 2018 -. All rights reserved.
 //
 
-#import "AlertHelper.h"
+#import "ZZAlertHelper.h"
 #import <Masonry/Masonry.h>
 
 #define kAlertImageHeight   40
 #define kAlertMargin    20
 
 static HelperConfigurationHandler configHandler;
-@interface AlertHelper ()
+@interface ZZAlertHelper ()
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -32,7 +32,7 @@ static HelperConfigurationHandler configHandler;
 
 @end
 
-@implementation AlertHelper
+@implementation ZZAlertHelper
 
 - (instancetype)initWithSourceView:(UIView *)sourceView delay:(NSTimeInterval)delayTime
 {
@@ -75,34 +75,34 @@ static HelperConfigurationHandler configHandler;
 
 #pragma mark - Public
 
-AlertHelper * AlertText(UIView *view)
+ZZAlertHelper * AlertText(UIView *view)
 {
-    return [[AlertHelper alloc] initWithSourceView:view delay:1.5];
+    return [[ZZAlertHelper alloc] initWithSourceView:view delay:1.5];
 }
 
-AlertHelper * AlertView(UIView *view)
+ZZAlertHelper * AlertView(UIView *view)
 {
-    return [[AlertHelper alloc] initWithSourceView:view delay:0];
+    return [[ZZAlertHelper alloc] initWithSourceView:view delay:0];
 }
 
-AlertHelper * AlertTextInWindow()
+ZZAlertHelper * AlertTextInWindow()
 {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     
-    return [[AlertHelper alloc] initWithSourceView:keyWindow delay:1.5];;
+    return [[ZZAlertHelper alloc] initWithSourceView:keyWindow delay:1.5];;
 }
 
-AlertHelper * AlertViewInWindow()
+ZZAlertHelper * AlertViewInWindow()
 {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
 
-    return [[AlertHelper alloc] initWithSourceView:keyWindow delay:0];
+    return [[ZZAlertHelper alloc] initWithSourceView:keyWindow delay:0];
 }
 
 void AlertHide(UIView *sourceView)
 {
     for (UIView *view in sourceView.subviews) {
-        if ([view isKindOfClass:[AlertHelper class]]) {
+        if ([view isKindOfClass:[ZZAlertHelper class]]) {
             [UIView animateWithDuration:0.2
                              animations:^{
                 [view removeFromSuperview];
@@ -116,7 +116,7 @@ void AlertHideInWindow(void)
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
 
     for (UIView *view in keyWindow.subviews) {
-        if ([view isKindOfClass:[AlertHelper class]]) {
+        if ([view isKindOfClass:[ZZAlertHelper class]]) {
             [UIView animateWithDuration:0.2
                              animations:^{
                 [view removeFromSuperview];
@@ -127,7 +127,7 @@ void AlertHideInWindow(void)
 
 // --------------------------
 
--(AlertHelper * (^)(void))show
+-(ZZAlertHelper * (^)(void))show
 {
     return ^(){
         [self mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -147,7 +147,7 @@ void AlertHideInWindow(void)
     };
 }
 
--(AlertHelper * (^)(NSTimeInterval))delay
+-(ZZAlertHelper * (^)(NSTimeInterval))delay
 {
     return ^(NSTimeInterval delay) {
         self.delayTime = delay;
@@ -155,7 +155,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIImage *))image
+- (ZZAlertHelper * (^)(UIImage *))image
 {
     return ^(UIImage *image) {
         self.imageView.image = image;
@@ -179,7 +179,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(NSString *))title
+- (ZZAlertHelper * (^)(NSString *))title
 {
      return ^(NSString *title){
          self.titleLabel.text = title;
@@ -204,7 +204,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(NSString *))confirmButton
+- (ZZAlertHelper * (^)(NSString *))confirmButton
 {
     return ^(NSString *str) {
         [self.btnConfirm setTitle:str forState:UIControlStateNormal];
@@ -223,12 +223,12 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(NSString *))cancelButton
+- (ZZAlertHelper * (^)(NSString *))cancelButton
 {
     return ^(NSString *str) {
         [self.btnCancel setTitle:str forState:UIControlStateNormal];
         
-        [_btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left);
             make.top.equalTo(self.contentView.mas_bottom);
             make.width.equalTo(self.contentView.mas_width).multipliedBy(0.5);
@@ -243,7 +243,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(ButtonActionBlock))confirmHandler
+- (ZZAlertHelper * (^)(ButtonActionBlock))confirmHandler
 {
     return ^(void(^handleBlock)(void)){
         self.confirmHandleBlock = handleBlock;
@@ -252,7 +252,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(ButtonActionBlock))cancelHandler
+- (ZZAlertHelper * (^)(ButtonActionBlock))cancelHandler
 {
     return ^(void(^handleBlock)(void)){
         self.cancelHandleBlock = handleBlock;
@@ -261,7 +261,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIColor *))cancelTitleColor
+- (ZZAlertHelper * (^)(UIColor *))cancelTitleColor
 {
     return ^(UIColor *color) {
         [self.btnCancel setTitleColor:color forState:UIControlStateNormal];
@@ -270,7 +270,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIColor *))confirmTitleColor
+- (ZZAlertHelper * (^)(UIColor *))confirmTitleColor
 {
     return ^(UIColor *color) {
         [self.btnConfirm setTitleColor:color forState:UIControlStateNormal];
@@ -279,7 +279,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIColor *))titleColor
+- (ZZAlertHelper * (^)(UIColor *))titleColor
 {
     return ^(UIColor *color) {
         self.titleLabel.textColor = color;
@@ -288,7 +288,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIColor *))confirmBackgroundColor
+- (ZZAlertHelper * (^)(UIColor *))confirmBackgroundColor
 {
     return ^(UIColor *color) {
         self.btnConfirm.backgroundColor = color;
@@ -297,7 +297,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIColor *))cancelBackgroundColor
+- (ZZAlertHelper * (^)(UIColor *))cancelBackgroundColor
 {
     return ^(UIColor *color) {
         self.btnCancel.backgroundColor = color;
@@ -306,7 +306,7 @@ void AlertHideInWindow(void)
     };
 }
 
-- (AlertHelper * (^)(UIFont *))font
+- (ZZAlertHelper * (^)(UIFont *))font
 {
     return ^(UIFont *font) {
         self.titleLabel.font = font;
@@ -322,7 +322,7 @@ void AlertHideInWindow(void)
 - (void)_hideViewFromSourceView
 {
     for (UIView *view in self.sourceView.subviews) {
-        if ([view isKindOfClass:[AlertHelper class]]) {
+        if ([view isKindOfClass:[ZZAlertHelper class]]) {
             [UIView animateWithDuration:0.2
                              animations:^{
                 [view removeFromSuperview];
@@ -484,7 +484,7 @@ void AlertHideInWindow(void)
 
 #pragma mark - Functions
 
-void SetupAlertHelperConfiguration(HelperConfigurationHandler handler)
+void SetupZZAlertHelperConfiguration(HelperConfigurationHandler handler)
 {
     handler = configHandler;
 }
