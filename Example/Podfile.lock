@@ -1,5 +1,5 @@
 PODS:
-  - AlertHelper (0.1.1):
+  - AlertHelper (0.1.2):
     - Masonry (~> 1.1.0)
   - Masonry (1.1.0)
 
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AlertHelper: eb23e5c6981dfa838ba2a4d50fef3cb43ae88a89
+  AlertHelper: 9fb1058eb3e3e595e81d61b2d1c33fe4d2357b47
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: 492db059356557811a1088f4054509cfb5627a4b

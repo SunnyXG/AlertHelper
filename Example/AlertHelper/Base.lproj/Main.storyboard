@@ -27,7 +27,7 @@
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="带确认按钮"/>
                                 <connections>
-                                    <action selector="buttonConfirmTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="gWR-eV-6Qx"/>
+                                    <action selector="buttonConfirmTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="5Vf-Ao-mcW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPV-eB-wbQ">
@@ -36,7 +36,7 @@
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="带图片"/>
                                 <connections>
-                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="lYW-5B-Qa6"/>
+                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="6ci-42-NCj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHE-Ec-e2i">
@@ -45,27 +45,16 @@
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="文本提示信息"/>
                                 <connections>
-                                    <action selector="defaultTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="Gep-jD-vLZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haG-cO-gPx">
-                                <rect key="frame" x="95" y="256" width="184" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="带一个按钮"/>
-                                <connections>
-                                    <action selector="alertWithSingleButton:" destination="whP-gf-Uak" eventType="touchUpInside" id="dPM-BO-phO"/>
-                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="8fA-9d-N4m"/>
+                                    <action selector="defaultTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="ZOB-Ua-gYU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AI-SR-qMr">
-                                <rect key="frame" x="95" y="318" width="184" height="30"/>
+                                <rect key="frame" x="95" y="254" width="184" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="在window上显示"/>
                                 <connections>
-                                    <action selector="alertAtWindow:" destination="whP-gf-Uak" eventType="touchUpInside" id="cI8-QA-gdO"/>
-                                    <action selector="imageTextTapped:" destination="whP-gf-Uak" eventType="touchUpInside" id="Egd-XH-UIC"/>
+                                    <action selector="alertAtWindow:" destination="whP-gf-Uak" eventType="touchUpInside" id="NbD-Xd-El1"/>
                                 </connections>
                             </button>
                         </subviews>
