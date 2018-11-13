@@ -26,7 +26,7 @@ AlertText(self.view).title(@"这是一条提示信息").show();   // it will hid
 If you want alert and need operate some thing, pls used
 
 ```objective-c
-AlertView(self.view).title(@"这是一条提示信息").cancelButton(@"取消").confirmButton(@"确定").cancelHandler(^{ 
+AlertView(self.view).title(@"这是一条提示标题").message(@"这是一条提示信息").cancelButton(@"取消").confirmButton(@"确定").cancelHandler(^{ 
 }).confirmHandler(^{   
 }).show();
 ```
@@ -40,7 +40,7 @@ AlertTextInWindow().title(@"").show();
 or 
 
 ```
-AlertViewInWindow().title(@"")..cancelButton(@"取消").confirmButton(@"确定").cancelHandler(^{ 
+AlertViewInWindow().title(@"").message(@"").cancelButton(@"取消").confirmButton(@"确定").cancelHandler(^{ 
 }).confirmHandler(^{   
 }).show();
 ```
@@ -51,7 +51,35 @@ If you want custom configuration, pls used
 AlertText(self.view).title(@"").font([UIFont ..]).titleColor([UIColor ..]).show();  // it have some comtus set, pls use it.
 ```
 
- 
+ also you can set global configuration like this  
+
+```objective-c
+// declare the HelperConfigurationHandler object.
+void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper);
+
+@interface ExampleClass()
+@end
+
+@implementation ExampleClass
+
+ // call this function at app launch<AppDelegate.m> or at the global app preference.   
+- (void)setupAppPerference
+{
+    // call the function to set the HelperConfigurationHandler object at AlertHelper.m. 
+   SetupZZAlertHelperConfiguration(CustomConfigurationForAlertHelper);
+}
+
+//  setup custom config at here.
+void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper)
+{
+    alertHelper.titleLabelTextColor = [UIColor blackColor];
+    alertHelper.textFont = [UIFont boldSystemFontOfSize:17];
+}
+    
+@end    
+```
+
+
 
 ## Installation
 
