@@ -30,6 +30,12 @@ AlertView(self.view).title(@"这是一条提示标题").message(@"这是一条�
 }).confirmHandler(^{   
 }).show();
 ```
+If you want do some thing when dismiss completion, pls used
+```
+AlertText(self.view).title(@"这是一条提示信息").show().dismissHandler(^{
+// do some thing at this.
+});
+```
 
 If you want alert in the window, pls used
 

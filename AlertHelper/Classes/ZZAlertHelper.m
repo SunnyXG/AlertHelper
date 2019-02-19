@@ -28,6 +28,7 @@ static HelperConfigurationHandler configHandler;
 @property (nonatomic, strong) UIView *sourceView;
 @property (nonatomic, copy) ButtonActionBlock confirmHandleBlock;
 @property (nonatomic, copy) ButtonActionBlock cancelHandleBlock;
+@property (nonatomic, copy) ButtonActionBlock dismissHandleBlock;
 
 @property (nonatomic, assign) CGFloat contentViewWidth;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
@@ -270,6 +271,15 @@ void AlertHideInWindow(void)
     };
 }
 
+- (ZZAlertHelper * (^)(ButtonActionBlock))dismissHandler
+{
+    return ^(void(^handleBlock)(void)){
+        self.dismissHandleBlock = handleBlock;
+        
+        return self;
+    };
+}
+
 - (ZZAlertHelper * (^)(UIColor *))cancelTitleColor
 {
     return ^(UIColor *color) {
@@ -361,6 +371,10 @@ void AlertHideInWindow(void)
             [UIView animateWithDuration:0.2
                              animations:^{
                 [view removeFromSuperview];
+                                 
+                if (self.dismissHandleBlock) {
+                    self.dismissHandleBlock();
+                }
             }];
         }
     }
@@ -437,7 +451,7 @@ void AlertHideInWindow(void)
     _titleLabelHeight = 0;
     
     if (_titleLabel.text) {
-        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.contentViewWidth, 120)) + 40;
+        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.contentViewWidth, 120), self.textFont ? : [UIFont systemFontOfSize:17]) + 40;
     }
     
     return _titleLabelHeight;
@@ -448,7 +462,7 @@ void AlertHideInWindow(void)
     _subtitleLabelHeight = 0;
     
     if (_subtitleLabel.text) {
-        _subtitleLabelHeight = GetHeightWithText(self.subtitleLabel.text, CGSizeMake(self.contentViewWidth, 120)) + 20;
+        _subtitleLabelHeight = GetHeightWithText(self.subtitleLabel.text, CGSizeMake(self.contentViewWidth, 120), self.messageTextFont ? : [UIFont systemFontOfSize:16]) + (self.titleLabel.text ? 25 : 40);
     }
     
     return _subtitleLabelHeight;
@@ -532,7 +546,7 @@ void AlertHideInWindow(void)
 {
     if (!_subtitleLabel) {
         _subtitleLabel = [CustomLabel new];
-        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(0, 0, 20, 0);
+        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(20, 0, 20, 0);
         _subtitleLabel.font = [UIFont systemFontOfSize:16];
         _subtitleLabel.textAlignment = NSTextAlignmentCenter;
         _subtitleLabel.textColor = [UIColor colorWithRed:(151 / 255.0f) green:(151 / 255.0f)                                                                                        blue:(151 / 255.0f) alpha:1];
@@ -556,7 +570,7 @@ void AlertHideInWindow(void)
                 [self _hideViewFromSourceView];
             }];
         } else {
-            [NSTimer scheduledTimerWithTimeInterval:delayTime target:self selector:@selector(_hideViewFromSourceView) userInfo:nil repeats:NO];
+           [NSTimer scheduledTimerWithTimeInterval:delayTime target:self selector:@selector(_hideViewFromSourceView) userInfo:nil repeats:NO];
         }
     }
 }
@@ -568,14 +582,14 @@ void SetupZZAlertHelperConfiguration(HelperConfigurationHandler handler)
     configHandler = handler;
 }
 
-CGFloat GetHeightWithText(NSString *text, CGSize textSize)
+CGFloat GetHeightWithText(NSString *text, CGSize textSize, UIFont *font)
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
     paragraphStyle.lineSpacing = 2;
     
-    NSDictionary* attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16],
+    NSDictionary* attributes = @{NSFontAttributeName:font,
                                  NSParagraphStyleAttributeName: paragraphStyle};
     
     CGRect rect = [text boundingRectWithSize:textSize

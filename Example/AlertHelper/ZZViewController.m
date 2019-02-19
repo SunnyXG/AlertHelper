@@ -46,10 +46,12 @@
 }
 
 - (IBAction)alertAtWindow:(id)sender {
-//    AlertTextInWindow().title(@"这是一条提示信息").show();
-    AlertViewInWindow().title(@"这是一条提示信息").confirmButton(@"确定").cancelButton(@"取消").confirmHandler(^{
-        NSLog(@"confirm tapped!");
-    }).show();
+    AlertTextInWindow().message(@"这是一条提示信息").show().dismissHandler(^{
+        NSLog(@"dismiss completion.");
+    });
+//    AlertViewInWindow().title(@"这是一条提示信息").confirmButton(@"确定").cancelButton(@"取消").confirmHandler(^{
+//        NSLog(@"confirm tapped!");
+//    }).show();
 }
 
 @end

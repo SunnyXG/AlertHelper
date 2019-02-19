@@ -48,6 +48,8 @@ typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 
 - (ZZAlertHelper * (^)(ButtonActionBlock))cancelHandler;
 
+- (ZZAlertHelper * (^)(ButtonActionBlock))dismissHandler;
+
 - (ZZAlertHelper * (^)(UIColor *))cancelTitleColor;
 
 - (ZZAlertHelper * (^)(UIColor *))confirmTitleColor;
