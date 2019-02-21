@@ -34,6 +34,8 @@ static HelperConfigurationHandler configHandler;
 @property (nonatomic, assign) CGFloat titleLabelHeight;
 @property (nonatomic, assign) CGFloat subtitleLabelHeight;
 
+@property (nonatomic, assign) BOOL isHasTitle;   // is the alert has title.
+
 @end
 
 @implementation ZZAlertHelper
@@ -186,6 +188,7 @@ void AlertHideInWindow(void)
 {
      return ^(NSString *title){
          self.titleLabel.text = title;
+         self.isHasTitle = YES;
          
          [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
              make.top.equalTo(self.imageView.mas_bottom);
@@ -419,18 +422,33 @@ void AlertHideInWindow(void)
 
 - (void)setTextFont:(UIFont *)textFont
 {
+    _textFont = textFont;
+    
     self.titleLabel.font = textFont;
 }
 
 - (void)setMessageTextFont:(UIFont *)messageTextFont
 {
+    _messageTextFont = messageTextFont;
+    
     self.subtitleLabel.font = messageTextFont;
 }
 
 - (void)setButtonTextFont:(UIFont *)buttonTextFont
 {
+    _buttonTextFont = buttonTextFont;
+    
     self.btnConfirm.titleLabel.font = buttonTextFont;
     self.btnCancel.titleLabel.font = buttonTextFont;
+}
+
+- (void)setIsHasTitle:(BOOL)isHasTitle
+{
+    _isHasTitle = isHasTitle;
+    
+    if (isHasTitle) {
+        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(0, 10, 20, 10);
+    }
 }
 
 - (CGFloat)contentViewWidth
@@ -451,7 +469,7 @@ void AlertHideInWindow(void)
     _titleLabelHeight = 0;
     
     if (_titleLabel.text) {
-        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.contentViewWidth, 120), self.textFont ? : [UIFont systemFontOfSize:17]) + 40;
+        _titleLabelHeight = GetHeightWithText(self.titleLabel.text, CGSizeMake(self.contentViewWidth -20, 120), self.textFont ? : [UIFont systemFontOfSize:17]) + 40;
     }
     
     return _titleLabelHeight;
@@ -462,7 +480,7 @@ void AlertHideInWindow(void)
     _subtitleLabelHeight = 0;
     
     if (_subtitleLabel.text) {
-        _subtitleLabelHeight = GetHeightWithText(self.subtitleLabel.text, CGSizeMake(self.contentViewWidth, 120), self.messageTextFont ? : [UIFont systemFontOfSize:16]) + (self.titleLabel.text ? 25 : 40);
+        _subtitleLabelHeight = GetHeightWithText(self.subtitleLabel.text, CGSizeMake(self.contentViewWidth -20, 300), self.messageTextFont ? : [UIFont systemFontOfSize:16]) + (self.titleLabel.text ? 25 : 40);
     }
     
     return _subtitleLabelHeight;
@@ -531,7 +549,7 @@ void AlertHideInWindow(void)
 {
     if (!_titleLabel) {
         _titleLabel = [CustomLabel new];
-        _titleLabel.edgeInsets = UIEdgeInsetsMake(20, 0, 20, 0);
+        _titleLabel.edgeInsets = UIEdgeInsetsMake(20, 10, 20, 10);
         _titleLabel.font = [UIFont boldSystemFontOfSize:17];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = [UIColor colorWithRed:(51 / 255.0f) green:(51 / 255.0f)                                                                                        blue:(51 / 255.0f) alpha:1];
@@ -546,7 +564,7 @@ void AlertHideInWindow(void)
 {
     if (!_subtitleLabel) {
         _subtitleLabel = [CustomLabel new];
-        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(20, 0, 20, 0);
+        _subtitleLabel.edgeInsets = UIEdgeInsetsMake(20, 10, 20, 10);
         _subtitleLabel.font = [UIFont systemFontOfSize:16];
         _subtitleLabel.textAlignment = NSTextAlignmentCenter;
         _subtitleLabel.textColor = [UIColor colorWithRed:(151 / 255.0f) green:(151 / 255.0f)                                                                                        blue:(151 / 255.0f) alpha:1];

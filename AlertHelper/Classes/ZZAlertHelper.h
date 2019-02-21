@@ -18,16 +18,16 @@ typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 
 @interface ZZAlertHelper : UIView
 
-@property (nonatomic, strong) UIColor *contentViewColor;
-@property (nonatomic, strong) UIColor *titleTextColor;
-@property (nonatomic, strong) UIColor *messageTextColor;
-@property (nonatomic, strong) UIColor *confirmButtonTextColor;
-@property (nonatomic, strong) UIColor *cancelButtonTextColor;
-@property (nonatomic, strong) UIColor *confirmButtonBackgroundColor;
-@property (nonatomic, strong) UIColor *cancelButtonBackgroundColor;
-@property (nonatomic, strong) UIFont *textFont;
-@property (nonatomic, strong) UIFont *messageTextFont;
-@property (nonatomic, strong) UIFont *buttonTextFont;
+@property (nonatomic, strong) UIColor *contentViewColor;   // default is UIColor.whiteColor;
+@property (nonatomic, strong) UIColor *titleTextColor;     // default is UIColor.blackColor;
+@property (nonatomic, strong) UIColor *messageTextColor;   // default is UIColor.whiteColor;
+@property (nonatomic, strong) UIColor *confirmButtonTextColor;  // default is RGB(250, 98, 27);
+@property (nonatomic, strong) UIColor *cancelButtonTextColor;   // default is RGB(102, 102, 102);
+@property (nonatomic, strong) UIColor *confirmButtonBackgroundColor;  // default is RGB(151, 151, 151);
+@property (nonatomic, strong) UIColor *cancelButtonBackgroundColor;   // default is UIColor.whiteColor;
+@property (nonatomic, strong) UIFont *textFont;   // default is 17.0pt;
+@property (nonatomic, strong) UIFont *messageTextFont;  // default is 16.00pt;
+@property (nonatomic, strong) UIFont *buttonTextFont;   // default is 17.00pt;
 
 
 - (ZZAlertHelper * (^)(UIImage *))image;
@@ -72,6 +72,32 @@ typedef void (*HelperConfigurationHandler)(ZZAlertHelper *);
 
 /*
  * Configuration alert customized.
+ *
+ * demo
+ *
+ * void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper);
+ *
+ * @interface ExampleClass()
+ * @end
+ *
+ * @implementation ExampleClass
+ 
+ * call this function at app launch<AppDelegate.m> or at the global app preference.
+ * - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+ * {
+ *   SetupZZAlertHelperConfiguration(CustomConfigurationForAlertHelper);
+ *
+ *   return YES.
+ * }
+ *
+ * //  setup custom config at here.
+ * void CustomConfigurationForAlertHelper(ZZAlertHelper *alertHelper)
+ * {
+ *   alertHelper.titleLabelTextColor = [UIColor blackColor];
+ *   alertHelper.textFont = [UIFont boldSystemFontOfSize:17];
+ * }
+ *
+ * @end
  */
 void SetupZZAlertHelperConfiguration(HelperConfigurationHandler handle);
 
