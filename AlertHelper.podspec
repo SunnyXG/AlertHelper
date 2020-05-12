@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AlertHelper'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'A custom alert view for ios.'
 
 # This description is used to generate tags and improve search results.
@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   s.source_files = 'AlertHelper/Classes/*.{h,m}'
   s.public_header_files = 'AlertHelper/Classes/*.h'
   s.frameworks = 'UIKit'
-  s.dependency 'Masonry', '~> 1.1.0'
+  s.dependency 'MasonryFlow'
 
   # s.resource_bundles = {
   #   'AlertHelper' => ['AlertHelper/Assets/*.png']

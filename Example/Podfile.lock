@@ -1,23 +1,23 @@
 PODS:
-  - AlertHelper (0.1.2):
-    - Masonry (~> 1.1.0)
-  - Masonry (1.1.0)
+  - AlertHelper (0.1.4):
+    - MasonryFlow
+  - MasonryFlow (0.0.1)
 
 DEPENDENCIES:
   - AlertHelper (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Masonry
+  https://github.com/SunnyXG/MasonryFlow.git:
+    - MasonryFlow
 
 EXTERNAL SOURCES:
   AlertHelper:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AlertHelper: 9fb1058eb3e3e595e81d61b2d1c33fe4d2357b47
-  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  AlertHelper: db2ebcfe15a8a4ab1b1ce1a01e169abcd31393c1
+  MasonryFlow: c2f257c75f74b410c684d8935cf1266981087062
 
-PODFILE CHECKSUM: 492db059356557811a1088f4054509cfb5627a4b
+PODFILE CHECKSUM: 8ca7ad28c51efbe8ac9d94f3b8d4136825c88e08
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

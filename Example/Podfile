@@ -1,3 +1,6 @@
+
+source 'https://github.com/SunnyXG/MasonryFlow.git'
+
 use_frameworks!
 
 target 'AlertHelper_Example' do

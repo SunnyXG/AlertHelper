@@ -220,6 +220,9 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = SunnyXG;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 6CWGJWAA28;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -230,6 +233,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -294,23 +298,19 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AlertHelper_Example/Pods-AlertHelper_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AlertHelper_Example/Pods-AlertHelper_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AlertHelper/AlertHelper.framework",
-				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/MasonryFlow/MasonryFlow.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlertHelper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MasonryFlow.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlertHelper_Example/Pods-AlertHelper_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlertHelper_Example/Pods-AlertHelper_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B41BC335FB14FF103E0BAB48 /* [CP] Check Pods Manifest.lock */ = {
@@ -489,6 +489,7 @@
 			baseConfigurationReference = 91DA2FB1C26BDE1100E8CE92 /* Pods-AlertHelper_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6CWGJWAA28;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlertHelper/AlertHelper-Prefix.pch";
 				INFOPLIST_FILE = "AlertHelper/AlertHelper-Info.plist";
@@ -504,6 +505,7 @@
 			baseConfigurationReference = 7A7AC1418F235A9225FEAC7D /* Pods-AlertHelper_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6CWGJWAA28;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AlertHelper/AlertHelper-Prefix.pch";
 				INFOPLIST_FILE = "AlertHelper/AlertHelper-Info.plist";

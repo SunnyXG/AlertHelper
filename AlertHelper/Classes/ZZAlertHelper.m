@@ -7,7 +7,7 @@
 //
 
 #import "ZZAlertHelper.h"
-#import <Masonry/Masonry.h>
+#import <MasonryFlow/Masonry.h>
 #import "CustomLabel.h"
 
 #define kAlertImageHeight   40
